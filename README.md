@@ -8,3 +8,6 @@ everyone starts with 3 health paddle
 players bounce the ball with their paddles and protect it from hitting their Edge of the screen
 players can move up down or left right depending on the side of the paddle
 Last person alive wins.
+
+tutorial used: 
+https://www.101computing.net/pong-tutorial-using-pygame-getting-started/
