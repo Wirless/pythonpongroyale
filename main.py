@@ -243,7 +243,7 @@ while carryOn:
         screen.blit(text, (250, 250))
     pygame.display.flip()
     # framers per /s 
-    clock.tick(600)
+    clock.tick(60)
     # display FPS instead of title
     pygame.display.set_caption("fps: " + str(clock.get_fps()))
 # goodybe
