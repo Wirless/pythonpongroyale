@@ -249,7 +249,10 @@ def main():
         # framers per /s
         clock.tick(60)
         # display FPS instead of title
-        pygame.display.set_caption("fps: " + str(clock.get_fps()))
+        # pygame.display.set_caption("fps: " + str(clock.get_fps()))
+        if winner != '':
+            pygame.time.delay(5000)
+            main()
     # goodybe
     pygame.quit()
 
