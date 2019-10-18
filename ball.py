@@ -20,7 +20,7 @@ class Ball(pygame.sprite.Sprite):
         self.image.set_colorkey(BLACK)
 
         pygame.draw.rect(self.image, color, [0, 0, size[0], size[1]])
-        self.velocity = [randint(2, 4), randint(-2, 6)]
+        self.velocity = [randint(2, 6), randint(-2, 6)]
         self.rect = self.image.get_rect()
         self.rect.topleft = pos
         self.rotation = 0
