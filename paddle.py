@@ -5,15 +5,8 @@
 
 import pygame
 
-# we got em colours
+import settings
 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GREEN = (78, 255, 87)
-YELLOW = (241, 255, 0)
-BLUE = (80, 255, 239)
-PURPLE = (203, 0, 255)
-RED = (237, 28, 36)
 
 # application is here
 class Paddle(pygame.sprite.Sprite):
@@ -26,8 +19,8 @@ class Paddle(pygame.sprite.Sprite):
         # Pass in the color of the car, and its x and y position, width and height.
         # Set the background color and set it to be transparent
         self.image = pygame.Surface(size)
-        self.image.fill(BLACK)
-        self.image.set_colorkey(BLACK)
+        self.image.fill(settings.BLACK)
+        self.image.set_colorkey(settings.BLACK)
         self.collision = [False]
 
         # Draw the paddle (a rectangle!)
