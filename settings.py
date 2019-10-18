@@ -9,6 +9,6 @@ RED = (237, 28, 36)
 
 # Wall borders where the ball will bounce.
 TOP_WALL = 0
-BOTTOM_WALL = 490
+BOTTOM_WALL = 690
 LEFT_WALL = 0
 RIGHT_WALL = 690
