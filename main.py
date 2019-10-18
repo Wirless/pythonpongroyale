@@ -16,11 +16,21 @@ from goal import Goal
 from paddle import Paddle
 
 
-def main():
+def time_check(self, name, time):
+    if name not in self.timers.keys():
+        self.timers[name] = time
+        return True
+    else:
+        if self.timers[name] < self.dt:
+            self.timers[name] += time
+            return True
+        else:
+            return False
 
+def main():
     # pygame initialize
     pygame.init()
-    bots = False
+    bots = True
     # BOTS turn True to turn on all bots.
     winner = ""
     loser = ""
@@ -100,6 +110,8 @@ def main():
             paddleD.moveLeft(5)
         if keys[pygame.K_RIGHT]:
             paddleD.moveRight(5)
+        if keys[pygame.K_SPACE]:
+            ball.bounce()
         if bots == True:
             # Blue Paddle AI
             if paddleB.rect.y >= ball.rect.y:
@@ -136,9 +148,31 @@ def main():
         if ball.rect.y < settings.TOP_WALL:
             scoreC -= 1
             ball.velocity[1] = -ball.velocity[1]
-            
 
-        
+        if ball.rect.y < -10:
+            all_sprites_list.remove(ball)
+            ball = Ball(settings.WHITE, (10, 10), (randint(300,400), randint(300,400)))
+            all_sprites_list.add(ball)
+        if ball.rect.y > 710:
+            all_sprites_list.remove(ball)
+            ball = Ball(settings.WHITE, (10, 10), (randint(300,400), randint(300,400)))
+            all_sprites_list.add(ball)
+        if ball.rect.x < -10:
+            all_sprites_list.remove(ball)
+            ball = Ball(settings.WHITE, (10, 10), (randint(300,400), randint(300,400)))
+            all_sprites_list.add(ball)
+        if ball.rect.y > 710:
+            all_sprites_list.remove(ball)
+            ball = Ball(settings.WHITE, (10, 10), (randint(300,400), randint(300,400)))
+            all_sprites_list.add(ball)
+                    
+        # TIME
+        #if self.time_check("myTimer", 5.):
+        #do the thing
+        #   self is not defined
+        #if self.time_check("myTimer", 5.):
+        #    text = font.render(str('aaaaaaaaaaaaa'), 1, settings.GREEN)
+        #    screen.blit(text, (255, 255))
         # ball physics to push ball away if it gets behind the paddle
         if (
             ball.rect.x >= 660
