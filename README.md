@@ -1,5 +1,5 @@
 # pythonpongroyale
-classic pong game in battle royale mode [cv] [jk] [as] [arrow up and down] as controls
+classic pong game in battle royale mode [wsad] [arrows] as controls
 
 In the game we can control 4 pallets
 #todo networking
