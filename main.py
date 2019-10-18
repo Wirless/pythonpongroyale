@@ -28,27 +28,16 @@ scoreD = 3
 size = (700, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Paddle Royale")
-# initthepaddle
-paddleA = Paddle(RED, 1, 80)
-paddleA.rect.x = 20
-paddleA.rect.y = 200
+# Init the paddles.
+paddleA = Paddle(RED, (1, 80), (20, 200))
+paddleB = Paddle(BLUE, (1, 80), (670, 200))
+paddleC = Paddle(YELLOW, (80, 1), (200, 15))
+paddleD = Paddle(GREEN, (80, 1), (250, 480))
 
 goalA = Goal(RED, (5, 800), (0, 0))
 goalB = Goal(BLUE, (5, 735), (695, 1))
 goalC = Goal(YELLOW, (700, 5), (0, 0))
 goalD = Goal(GREEN, (700, 5), (0, 495))
-
-paddleB = Paddle(BLUE, 1, 80)
-paddleB.rect.x = 670
-paddleB.rect.y = 200
-
-paddleC = Paddle(YELLOW, 80, 1)
-paddleC.rect.x = 200
-paddleC.rect.y = 15
-
-paddleD = Paddle(GREEN, 80, 1)
-paddleD.rect.x = 250
-paddleD.rect.y = 480
 
 ball = Ball(WHITE, 10, 10)
 ball.rect.x = 345
