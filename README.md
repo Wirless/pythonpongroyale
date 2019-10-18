@@ -23,3 +23,4 @@ ball turns into your colour and if it hits your goal you wont lose health (5seco
 ball splits into 3 and they disappear if they hit goal (but 1 always stays as hard object)
 your pallet get longer / shorter (2x powerups)
 powerups ideally should start like a ball from middle of screen randomly and be able to disappear if no one catches them in desired time
+have an idea that whenever ball first bounces of someones pallet they have "semi" control and can alter the balls movement 3 times
