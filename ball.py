@@ -27,7 +27,7 @@ class Ball(pygame.sprite.Sprite):
 		
 	def bounce(self):
 		#delay to let the ball move before it rebounces itself.
-		pygame.time.delay(100)
+		#depracated pygame.time.delay(100)
 		self.velocity[0] = -self.velocity[0]
 		self.velocity[1] = randint(-8,8)
 
