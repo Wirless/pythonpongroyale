@@ -20,11 +20,12 @@ def main():
 
     # pygame initialize
     pygame.init()
-
-    # BOTS turn True to turn on all bots.
     bots = False
+    # BOTS turn True to turn on all bots.
     winner = ""
     loser = ""
+    time_elapsed = 0
+    dt = pygame.time.get_ticks()
 
     # Players health
     scoreA = 3
@@ -49,7 +50,7 @@ def main():
     goalC = Goal(settings.YELLOW, (700, 5), (0, 0))
     goalD = Goal(settings.GREEN, (700, 5), (0, 695))
 
-    ball = Ball(settings.WHITE, (10, 10), (345, 195))
+    ball = Ball(settings.WHITE, (10, 10), (randint(300,400), randint(300,400)))
 
     # group sprites
     all_sprites_list = pygame.sprite.Group()
@@ -135,6 +136,9 @@ def main():
         if ball.rect.y < settings.TOP_WALL:
             scoreC -= 1
             ball.velocity[1] = -ball.velocity[1]
+            
+
+        
         # ball physics to push ball away if it gets behind the paddle
         if (
             ball.rect.x >= 660
@@ -245,8 +249,9 @@ def main():
         # display FPS instead of title
         # pygame.display.set_caption("fps: " + str(clock.get_fps()))
         if winner != '':
-            pygame.time.delay(5000)
+            pygame.time.delay(4000)
             main()
+            
     # goodybe
     pygame.quit()
 
