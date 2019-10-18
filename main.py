@@ -1,17 +1,18 @@
-#!/usr/bin/env python
+#####################################
+#!/usr/bin/env python               #
+#authors are constantly updated     #
+# authors: Wirless / hnrkcode / ... #
+# Title: Paddle Royale              #
+#####################################
 
+#required libraries
 import pygame
-
 from ball import Ball
 from goal import Goal
-# some paddle yoke
-# Created by some wee man
 from paddle import Paddle
-
+#pygame initialize
 pygame.init()
-
-# we got em colours
-winner = ""
+# Color enumerators
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (78, 255, 87)
@@ -19,55 +20,59 @@ YELLOW = (241, 255, 0)
 BLUE = (80, 255, 239)
 PURPLE = (203, 0, 255)
 RED = (237, 28, 36)
+#main variables
+winner = ""
 loser = "Loser"
-# application is here
+# Players health
 scoreA = 3
 scoreB = 3
 scoreC = 3
 scoreD = 3
+#window size and initialization + Title "Title is not showing because FPS is on"
 size = (700, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Paddle Royale")
-# initthepaddle
+#Paddle Initialization
+# Player 1
 paddleA = Paddle(RED, 1, 80)
-paddleA.rect.x = 20
-paddleA.rect.y = 200
-
-goalA = Goal(RED, 5, 800)
-goalA.rect.x = 0
-goalA.rect.y = 0
-
-goalB = Goal(BLUE, 5, 735)
-goalB.rect.x = 695
-goalB.rect.y = 1
-
-#
-goalC = Goal(YELLOW, 700, 5)
-goalC.rect.x = 0
-goalC.rect.y = 0
-#
-goalD = Goal(GREEN, 700, 5)
-goalD.rect.x = 0
-goalD.rect.y = 495
-
+paddleA.rect.x = 20 #position x
+paddleA.rect.y = 200 #position y
+# Player 2
 paddleB = Paddle(BLUE, 1, 80)
 paddleB.rect.x = 670
 paddleB.rect.y = 200
-
+# Player 3
 paddleC = Paddle(YELLOW, 80, 1)
 paddleC.rect.x = 200
 paddleC.rect.y = 15
-
+# Player 4
 paddleD = Paddle(GREEN, 80, 1)
 paddleD.rect.x = 250
 paddleD.rect.y = 480
-
+# Goal initialization "sprite"
+# Goal 1
+goalA = Goal(RED, 5, 800)
+goalA.rect.x = 0
+goalA.rect.y = 0
+# Goal 2
+goalB = Goal(BLUE, 5, 735)
+goalB.rect.x = 695
+goalB.rect.y = 1
+# Goal 3
+goalC = Goal(YELLOW, 700, 5)
+goalC.rect.x = 0
+goalC.rect.y = 0
+# Goal 4
+goalD = Goal(GREEN, 700, 5)
+goalD.rect.x = 0
+goalD.rect.y = 495
+# Ball generation
 ball = Ball(WHITE, 10, 10)
 ball.rect.x = 345
 ball.rect.y = 195
-# ay
+# group sprites
 all_sprites_list = pygame.sprite.Group()
-
+# add all the sprites to the window
 all_sprites_list.add(paddleA)
 all_sprites_list.add(paddleB)
 all_sprites_list.add(paddleC)
@@ -77,23 +82,21 @@ all_sprites_list.add(ball)
 all_sprites_list.add(goalB)
 all_sprites_list.add(goalC)
 all_sprites_list.add(goalD)
-# looping
+# looping if it breaks out we could have restart or switch between screens
 carryOn = True
-
-# time weeman
+# initialize clock for frame counting
 clock = pygame.time.Clock()
-
-
 # START
 while carryOn:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             carryOn = False
+            #exit game with p
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_p:
                 carryOn = False
 
-    # keying
+    # Controls
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
         paddleA.moveUp(10)
@@ -112,9 +115,9 @@ while carryOn:
     if keys[pygame.K_RIGHT]:
         paddleD.moveRight(10)
 
-    # logicke
+    # update sprites in real time while the game plays.
     all_sprites_list.update()
-    # ibeballing
+    # Ball bounce of walls (not yet goals) score point
     if ball.rect.x >= 690:
         scoreB -= 1
         ball.velocity[0] = -ball.velocity[0]
@@ -127,7 +130,7 @@ while carryOn:
     if ball.rect.y < 0:
         scoreC -= 1
         ball.velocity[1] = -ball.velocity[1]
-
+    # ball physics to push ball away if it gets behind the paddle
     if ball.rect.x >= 660 and pygame.sprite.collide_mask(ball, paddleB) and scoreB >= 1:
         ball.velocity[0] = -ball.velocity[0]
         ball.rect.x = 660
@@ -140,7 +143,7 @@ while carryOn:
     if ball.rect.y < 25 and pygame.sprite.collide_mask(ball, paddleC) and scoreC >= 1:
         ball.velocity[1] = -ball.velocity[1]
         ball.rect.y = 25
-
+    # ball physics to bounce on collision with paddles checks for score to disable bouncing as paddle object stays in game its just sprite that stops rendering.
     if pygame.sprite.collide_mask(ball, paddleA) and scoreA >= 1:
         ball.bounce()
     elif pygame.sprite.collide_mask(ball, paddleB) and scoreB >= 1:
@@ -149,7 +152,7 @@ while carryOn:
         ball.bounce()
     elif pygame.sprite.collide_mask(ball, paddleD) and scoreD >= 1:
         ball.bounce()
-        # BEGIN REMOVING PADDLES sprites remove but object is still there :o
+    # BEGIN removing the sprite of each paddle once player dies.
     if scoreA <= 0:
         all_sprites_list.remove(paddleA)
     if scoreB <= 0:
@@ -160,12 +163,10 @@ while carryOn:
         all_sprites_list.remove(paddleD)
     # screen color or backdrop
     screen.fill(BLACK)
-
-    # remove this line and create 4 coloured offset lines
-
+    # draw the sprites from the group onto the scene
     all_sprites_list.draw(screen)
     # update me please anytime i move
-    # scorez
+    # scoring logic
     font = pygame.font.Font(None, 74)
     if scoreA >= 1 and winner != "red":
         text = font.render(str(scoreA), 1, RED)
@@ -217,8 +218,9 @@ while carryOn:
         text = font.render(str("winner"), 1, GREEN)
         screen.blit(text, (250, 250))
     pygame.display.flip()
-    # im timer
+    # framers per /s 
     clock.tick(60)
+    # display FPS instead of title
     pygame.display.set_caption("fps: " + str(clock.get_fps()))
 # goodybe
 pygame.quit()
