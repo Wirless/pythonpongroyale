@@ -231,7 +231,7 @@ while carryOn:
     if winner == "red":
         text = font.render(str("winner"), 1, RED)
         screen.blit(text, (250, 250))
-        carryOn = False
+       #carryOn = False
     elif winner == "blue":
         text = font.render(str("winner"), 1, BLUE)
         screen.blit(text, (250, 250))
