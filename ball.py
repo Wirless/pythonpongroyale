@@ -12,16 +12,17 @@ RED = (237, 28, 36)
 
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self, color, width, height):
+    def __init__(self, color, size, pos):
         super().__init__()
 
-        self.image = pygame.Surface([width, height])
+        self.image = pygame.Surface(size)
         self.image.fill(BLACK)
         self.image.set_colorkey(BLACK)
 
-        pygame.draw.rect(self.image, color, [0, 0, width, height])
+        pygame.draw.rect(self.image, color, [0, 0, size[0], size[1]])
         self.velocity = [randint(2, 4), randint(-2, 6)]
         self.rect = self.image.get_rect()
+        self.rect.topleft = pos
         self.rotation = 0
 
     def update(self):

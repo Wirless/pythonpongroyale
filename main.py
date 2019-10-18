@@ -43,9 +43,8 @@ goalB = Goal(BLUE, (5, 735), (695, 1))
 goalC = Goal(YELLOW, (700, 5), (0, 0))
 goalD = Goal(GREEN, (700, 5), (0, 495))
 
-ball = Ball(WHITE, 10, 10)
-ball.rect.x = 345
-ball.rect.y = 195
+ball = Ball(WHITE, (10, 10), (345, 195))
+
 # group sprites
 all_sprites_list = pygame.sprite.Group()
 # add all the sprites to the window
