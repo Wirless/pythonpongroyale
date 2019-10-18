@@ -24,7 +24,8 @@ class Ball(pygame.sprite.Sprite):
         self.rect.y += self.velocity[1]
 
     def bounce(self):
+        
         # delay to let the ball move before it rebounces itself.
         # depracated pygame.time.delay(100)
         self.velocity[0] = -self.velocity[0]
-        self.velocity[1] = uniform(-8.0, 8.4)
+        self.velocity[1] = uniform(-8.0, 8.0)
