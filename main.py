@@ -33,22 +33,10 @@ paddleA = Paddle(RED, 1, 80)
 paddleA.rect.x = 20
 paddleA.rect.y = 200
 
-goalA = Goal(RED, 5, 800)
-goalA.rect.x = 0
-goalA.rect.y = 0
-
-goalB = Goal(BLUE, 5, 735)
-goalB.rect.x = 695
-goalB.rect.y = 1
-
-#
-goalC = Goal(YELLOW, 700, 5)
-goalC.rect.x = 0
-goalC.rect.y = 0
-#
-goalD = Goal(GREEN, 700, 5)
-goalD.rect.x = 0
-goalD.rect.y = 495
+goalA = Goal(RED, (5, 800), (0, 0))
+goalB = Goal(BLUE, (5, 735), (695, 1))
+goalC = Goal(YELLOW, (700, 5), (0, 0))
+goalD = Goal(GREEN, (700, 5), (0, 495))
 
 paddleB = Paddle(BLUE, 1, 80)
 paddleB.rect.x = 670
