@@ -30,7 +30,7 @@ def main():
     # BOTS turn True to turn on all bots.
     bots = False
     winner = ""
-    loser = "Loser"
+    loser = ""
 
     # Players health
     scoreA = 3
@@ -39,7 +39,7 @@ def main():
     scoreD = 3
 
     # window size and initialization + Title "Title is not showing because FPS is on"
-    size = (700, 500)
+    size = (700, 700)
     screen = pygame.display.set_mode(size)
     pygame.display.set_caption("Paddle Royale")
 
@@ -47,13 +47,13 @@ def main():
     paddleA = Paddle(RED, (10, 80), (20, 200))
     paddleB = Paddle(BLUE, (10, 80), (670, 200))
     paddleC = Paddle(YELLOW, (80, 10), (200, 15))
-    paddleD = Paddle(GREEN, (80, 10), (250, 480))
+    paddleD = Paddle(GREEN, (80, 10), (250, 680))
 
     # Goal initialization "sprite"
     goalA = Goal(RED, (5, 800), (0, 0))
     goalB = Goal(BLUE, (5, 735), (695, 1))
     goalC = Goal(YELLOW, (700, 5), (0, 0))
-    goalD = Goal(GREEN, (700, 5), (0, 495))
+    goalD = Goal(GREEN, (700, 5), (0, 695))
 
     ball = Ball(WHITE, (10, 10), (345, 195))
 
@@ -135,7 +135,7 @@ def main():
         if ball.rect.x <= 0:
             scoreA -= 1
             ball.velocity[0] = -ball.velocity[0]
-        if ball.rect.y > 490:
+        if ball.rect.y > 690:
             scoreD -= 1
             ball.velocity[1] = -ball.velocity[1]
         if ball.rect.y < 0:
@@ -157,12 +157,12 @@ def main():
             ball.velocity[0] = -ball.velocity[0]
             ball.rect.x = 30
         if (
-            ball.rect.y > 470
+            ball.rect.y > 670
             and pygame.sprite.collide_mask(ball, paddleD)
             and scoreD >= 1
         ):
             ball.velocity[1] = -ball.velocity[1]
-            ball.rect.y = 470
+            ball.rect.y = 670
         if (
             ball.rect.y < 25
             and pygame.sprite.collide_mask(ball, paddleC)
@@ -197,28 +197,28 @@ def main():
         font = pygame.font.Font(None, 74)
         if scoreA >= 1 and winner != "red":
             text = font.render(str(scoreA), 1, RED)
-            screen.blit(text, (250, 10))
+            screen.blit(text, (25, 10))
         elif scoreA <= 0 and winner != "red":
             text = font.render(str(loser), 1, RED)
-            screen.blit(text, (250, 10))
+            screen.blit(text, (25, 10))
         if scoreB >= 1 and winner != "blue":
             text = font.render(str(scoreB), 1, BLUE)
-            screen.blit(text, (420, 10))
+            screen.blit(text, (640, 620))
         elif scoreB <= 0 and winner != "blue":
             text = font.render(str(loser), 1, BLUE)
-            screen.blit(text, (420, 10))
+            screen.blit(text, (640, 620))
         if scoreC >= 1 and winner != "yellow":
             text = font.render(str(scoreC), 1, YELLOW)
-            screen.blit(text, (420, 420))
+            screen.blit(text, (640, 10))
         elif scoreC <= 0 and winner != "yellow":
             text = font.render(str(loser), 1, YELLOW)
-            screen.blit(text, (420, 420))
+            screen.blit(text, (640, 10))
         if scoreD >= 1 and winner != "green":
             text = font.render(str(scoreD), 1, GREEN)
-            screen.blit(text, (250, 420))
+            screen.blit(text, (25, 620))
         elif scoreD <= 0 and winner != "green":
             text = font.render(str(loser), 1, GREEN)
-            screen.blit(text, (250, 420))
+            screen.blit(text, (25, 620))
         if scoreA >= 1 and scoreB <= 0 and scoreC <= 0 and scoreD <= 0:
             winner = "red"
             scoreA += 100
