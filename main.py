@@ -166,41 +166,42 @@ while carryOn:
 	# update me please anytime i move
 	#scorez
 	font = pygame.font.Font(None, 74)
-	if scoreA >= 1:
+	if scoreA >= 1 and winner != 'red':
 		text = font.render(str(scoreA), 1, RED)
 		screen.blit(text, (250,10))
-	elif scoreA <= 0:
+	elif scoreA <= 0 and winner != 'red':
 		text = font.render(str(loser), 1, RED)
 		screen.blit(text, (250,10))
-	if scoreB >= 1:
+	if scoreB >= 1 and winner != 'blue':
 		text = font.render(str(scoreB), 1, BLUE)
 		screen.blit(text, (420,10))
-	elif scoreB <= 0:
+	elif scoreB <= 0 and winner != 'blue':
 		text = font.render(str(loser), 1, BLUE)
 		screen.blit(text, (420,10))
-	if scoreC >=1:
+	if scoreC >=1 and winner != 'yellow':
 		text = font.render(str(scoreC), 1, YELLOW)
 		screen.blit(text, (420,420))
-	elif scoreC <=0:
+	elif scoreC <=0 and winner != 'yellow':
 		text = font.render(str(loser), 1, YELLOW)
 		screen.blit(text, (420,420))
-	if scoreD >=1:
+	if scoreD >=1 and winner != 'green':
 		text = font.render(str(scoreD), 1, GREEN)
 		screen.blit(text, (250,420))
-	elif scoreD <=0:
+	elif scoreD <=0 and winner != 'green':
 		text = font.render(str(loser), 1, GREEN)
 		screen.blit(text, (250,420))
 	if scoreA >=1 and scoreB <=0 and scoreC <=0 and scoreD <=0:
 		winner = 'red'
+		scoreA += 100
 	elif scoreB >=1 and scoreA<=0 and scoreC<=0 and scoreD<=0:
 		winner = 'blue'
-
+		scoreB += 100
 	elif scoreC >=1 and scoreA<=0 and scoreB<=0 and scoreD<=0:
 		winner = 'yellow'
-
+		scoreC += 100
 	elif scoreD >=1 and scoreA<=0 and scoreB<=0 and scoreC<=0:
 		winner = 'green'
-
+		scoreD += 100
 	
 	if winner == 'red':
 		text = font.render(str('winner'), 1, RED)
