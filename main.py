@@ -25,9 +25,9 @@ scoreC = 3
 scoreD = 3
 size =	(700,500)
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption("weegame")
+pygame.display.set_caption("Paddle Royale")
 #initthepaddle
-paddleA = Paddle(RED, 10, 80)
+paddleA = Paddle(RED, 1, 80)
 paddleA.rect.x = 20
 paddleA.rect.y = 200
 
@@ -48,15 +48,15 @@ goalD = Goal(GREEN, 700, 5)
 goalD.rect.x = 0
 goalD.rect.y = 495
  
-paddleB = Paddle(BLUE, 10, 80)
+paddleB = Paddle(BLUE, 1, 80)
 paddleB.rect.x = 670
 paddleB.rect.y = 200
 
-paddleC = Paddle(YELLOW, 80, 10)
+paddleC = Paddle(YELLOW, 80, 1)
 paddleC.rect.x = 200
 paddleC.rect.y = 15
 
-paddleD = Paddle(GREEN, 80, 10)
+paddleD = Paddle(GREEN, 80, 1)
 paddleD.rect.x = 250
 paddleD.rect.y = 480
 
@@ -101,18 +101,17 @@ while carryOn:
 		paddleB.moveUp(10)
 	if keys[pygame.K_DOWN]:
 		paddleB.moveDown(10)
-	if keys[pygame.K_c]:
+	if keys[pygame.K_a]:
 		paddleC.moveLeft(10)
-	if keys[pygame.K_v]:
+	if keys[pygame.K_d]:
 		paddleC.moveRight(10)
-	if keys[pygame.K_j]:
+	if keys[pygame.K_LEFT]:
 		paddleD.moveLeft(10)
-	if keys[pygame.K_k]:
+	if keys[pygame.K_RIGHT]:
 		paddleD.moveRight(10)
 				
 	#logicke
 	all_sprites_list.update()
-	
 	#ibeballing
 	if ball.rect.x>= 690:
 		scoreB-=1
@@ -126,8 +125,28 @@ while carryOn:
 	if ball.rect.y<0:
 		scoreC-=1
 		ball.velocity[1] = -ball.velocity[1]
-        
-	if pygame.sprite.collide_mask(ball, paddleA) and scoreA >= 1 or pygame.sprite.collide_mask(ball, paddleB) and scoreB >= 1 or pygame.sprite.collide_mask(ball, paddleC) and scoreC >= 1 or pygame.sprite.collide_mask(ball, paddleD) and scoreD >=1:
+		
+
+	if ball.rect.x>=670 and pygame.sprite.collide_mask(ball, paddleB) and scoreB>=1:
+		ball.velocity[0] = -ball.velocity[0]
+		ball.rect.x = 665
+	if ball.rect.x<=20 and pygame.sprite.collide_mask(ball, paddleA) and scoreA>=1:
+		ball.velocity[0] = -ball.velocity[0]
+		ball.rect.x = 25
+	if ball.rect.y>480 and pygame.sprite.collide_mask(ball, paddleD) and scoreD>=1:
+		ball.velocity[1] = -ball.velocity[1]
+		ball.rect.y = 475
+	if ball.rect.y<15 and pygame.sprite.collide_mask(ball,paddleC) and scoreC>=1:
+		ball.velocity[1] = -ball.velocity[1]
+		ball.rect.y = 20
+		
+	if pygame.sprite.collide_mask(ball, paddleA) and scoreA >= 1:
+		ball.bounce()
+	elif pygame.sprite.collide_mask(ball, paddleB) and scoreB >= 1:
+		ball.bounce()
+	elif pygame.sprite.collide_mask(ball, paddleC) and scoreC >= 1:
+		ball.bounce()
+	elif pygame.sprite.collide_mask(ball, paddleD) and scoreD >=1:
 		ball.bounce()
     #BEGIN REMOVING PADDLES sprites remove but object is still there :o
 	if scoreA <= 0:
@@ -174,6 +193,6 @@ while carryOn:
 	pygame.display.flip()
 	#im timer
 	clock.tick(60)
-	
+	pygame.display.set_caption("fps: " + str(clock.get_fps()))
 #goodybe	
 pygame.quit()
