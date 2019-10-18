@@ -9,7 +9,7 @@ import pygame
 pygame.init()
 
 #we got em colours
-
+winner = ''
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (78, 255, 87)
@@ -190,6 +190,30 @@ while carryOn:
 	elif scoreD <=0:
 		text = font.render(str(loser), 1, GREEN)
 		screen.blit(text, (250,420))
+	if scoreA >=1 and scoreB <=0 and scoreC <=0 and scoreD <=0:
+		winner = 'red'
+	elif scoreB >=1 and scoreA<=0 and scoreC<=0 and scoreD<=0:
+		winner = 'blue'
+
+	elif scoreC >=1 and scoreA<=0 and scoreB<=0 and scoreD<=0:
+		winner = 'yellow'
+
+	elif scoreD >=1 and scoreA<=0 and scoreB<=0 and scoreC<=0:
+		winner = 'green'
+
+	
+	if winner == 'red':
+		text = font.render(str('winner'), 1, RED)
+		screen.blit(text, (250,250))
+	elif winner == 'blue':
+		text = font.render(str('winner'), 1, BLUE)
+		screen.blit(text, (250,250))
+	elif winner == 'yellow':
+		text = font.render(str('winner'), 1, YELLOW)
+		screen.blit(text, (250,250))
+	elif winner == 'green':
+		text = font.render(str('winner'), 1, GREEN)
+		screen.blit(text, (250,250))
 	pygame.display.flip()
 	#im timer
 	clock.tick(60)
