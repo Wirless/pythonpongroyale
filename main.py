@@ -127,18 +127,18 @@ while carryOn:
 		ball.velocity[1] = -ball.velocity[1]
 		
 
-	if ball.rect.x>=670 and pygame.sprite.collide_mask(ball, paddleB) and scoreB>=1:
+	if ball.rect.x>=660 and pygame.sprite.collide_mask(ball, paddleB) and scoreB>=1:
 		ball.velocity[0] = -ball.velocity[0]
-		ball.rect.x = 665
-	if ball.rect.x<=20 and pygame.sprite.collide_mask(ball, paddleA) and scoreA>=1:
+		ball.rect.x = 660
+	if ball.rect.x<=30 and pygame.sprite.collide_mask(ball, paddleA) and scoreA>=1:
 		ball.velocity[0] = -ball.velocity[0]
-		ball.rect.x = 25
-	if ball.rect.y>480 and pygame.sprite.collide_mask(ball, paddleD) and scoreD>=1:
+		ball.rect.x = 30
+	if ball.rect.y>470 and pygame.sprite.collide_mask(ball, paddleD) and scoreD>=1:
 		ball.velocity[1] = -ball.velocity[1]
-		ball.rect.y = 475
-	if ball.rect.y<15 and pygame.sprite.collide_mask(ball,paddleC) and scoreC>=1:
+		ball.rect.y = 470
+	if ball.rect.y<25 and pygame.sprite.collide_mask(ball,paddleC) and scoreC>=1:
 		ball.velocity[1] = -ball.velocity[1]
-		ball.rect.y = 20
+		ball.rect.y = 25
 		
 	if pygame.sprite.collide_mask(ball, paddleA) and scoreA >= 1:
 		ball.bounce()
