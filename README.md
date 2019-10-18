@@ -1,4 +1,4 @@
-# pythonpongroyale
+# Paddle-Royale
 classic pong game in battle royale mode [wsad] [arrows] as controls
 
 ps currently paddles move double the speed to fix that edit #controls in main.py
