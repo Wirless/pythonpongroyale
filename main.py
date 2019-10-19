@@ -194,7 +194,7 @@ def main():
             ball.velocity[0] < 1.0 
             and ball.velocity[0] > -1.0
         ):
-            ball.bouncevertical() 
+            ball.bounce() 
             
         # ball physics to bounce on collision with paddles checks for score to disable bouncing as paddle object stays in game its just sprite that stops rendering.
         if pygame.sprite.collide_mask(ball, paddleA) and scoreA >= 1:
