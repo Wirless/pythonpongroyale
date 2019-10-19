@@ -80,8 +80,6 @@ def main():
                 if event.key == pygame.K_p:
                     carryOn = False
                 #might just make variable or something.
-                elif event.key == pygame.K_SPACE:
-                    print("space down")
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_SPACE:
                     print("space up")
@@ -110,24 +108,24 @@ def main():
         if settings.BOTS == True:
             # Blue Paddle AI
             if paddleB.rect.y+40 > ball.rect.y:
-                paddleB.moveUp(randint(10,10))
+                paddleB.moveUp(randint(1,3))
             if paddleB.rect.y+40 < ball.rect.y:
-                paddleB.moveDown(randint(10,10))
+                paddleB.moveDown(randint(1,3))
             # Paddle red AI
             if paddleA.rect.y+40 > ball.rect.y:
-                paddleA.moveUp(randint(10,10))
+                paddleA.moveUp(randint(1,3))
             if paddleA.rect.y+40 < ball.rect.y:
-                paddleA.moveDown(randint(10,10))
+                paddleA.moveDown(randint(1,3))
             # Paddle Yellow AI
             if paddleC.rect.x+40 < ball.rect.x:
-                paddleC.moveRight(randint(10,10))
+                paddleC.moveRight(randint(1,3))
             if paddleC.rect.x+40 > ball.rect.x:
-                paddleC.moveLeft(randint(10,10))
+                paddleC.moveLeft(randint(1,3))
             # Paddle Green AI
             if paddleD.rect.x+40 < ball.rect.x:
-                paddleD.moveRight(randint(10,10))
+                paddleD.moveRight(randint(1,3))
             if paddleD.rect.x+40 > ball.rect.x:
-                paddleD.moveLeft(randint(10,10))
+                paddleD.moveLeft(randint(1,3))
         # update sprites in real time while the game plays.
         all_sprites_list.update()
         # Ball bounce of walls (not yet goals) score point
@@ -161,30 +159,28 @@ def main():
             ball = Ball(settings.WHITE, (10, 10), (randint(300,400), randint(300,400)))
             all_sprites_list.add(ball)
         # ball physics to push ball away if it gets behind the paddle
+        if ball.rect.x-10 > paddleB.rect.x and pygame.sprite.collide_mask(ball,paddleB):
+            ball.velocity[1] = -ball.velocity[1]
         if (
-            ball.rect.x >= 660
-            and pygame.sprite.collide_mask(ball, paddleB)
+            pygame.sprite.collide_mask(ball, paddleB)
             and scoreB >= 1
         ):
             ball.velocity[0] = -ball.velocity[0]
             ball.rect.x = 660
         if (
-            ball.rect.x <= 30
-            and pygame.sprite.collide_mask(ball, paddleA)
+            pygame.sprite.collide_mask(ball, paddleA)
             and scoreA >= 1
         ):
             ball.velocity[0] = -ball.velocity[0]
             ball.rect.x = 30
         if (
-            ball.rect.y > 670
-            and pygame.sprite.collide_mask(ball, paddleD)
+            pygame.sprite.collide_mask(ball, paddleD)
             and scoreD >= 1
         ):
             ball.velocity[1] = -ball.velocity[1]
             ball.rect.y = 670
         if (
-            ball.rect.y < 25
-            and pygame.sprite.collide_mask(ball, paddleC)
+            pygame.sprite.collide_mask(ball, paddleC)
             and scoreC >= 1
         ):
             ball.velocity[1] = -ball.velocity[1]
