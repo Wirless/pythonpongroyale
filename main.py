@@ -16,21 +16,10 @@ from goal import Goal
 from paddle import Paddle
 
 
-def time_check(self, name, time):
-    if name not in self.timers.keys():
-        self.timers[name] = time
-        return True
-    else:
-        if self.timers[name] < self.dt:
-            self.timers[name] += time
-            return True
-        else:
-            return False
 
 def main():
     # pygame initialize
     pygame.init()
-    bots = True
     # BOTS turn True to turn on all bots.
     winner = ""
     loser = ""
@@ -42,7 +31,6 @@ def main():
     scoreB = 3
     scoreC = 3
     scoreD = 3
-
     # window size and initialization + Title "Title is not showing because FPS is on"
     size = (700, 700)
     screen = pygame.display.set_mode(size)
@@ -91,7 +79,6 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
                     carryOn = False
-
         # Controls
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
@@ -111,28 +98,28 @@ def main():
         if keys[pygame.K_RIGHT]:
             paddleD.moveRight(5)
         if keys[pygame.K_SPACE]:
-            ball.bounce()
-        if bots == True:
+            ball.bouncevertical()
+        if settings.BOTS == True:
             # Blue Paddle AI
-            if paddleB.rect.y >= ball.rect.y:
-                paddleB.moveUp(randint(3, 8))
-            if paddleB.rect.y <= ball.rect.y:
-                paddleB.moveDown(randint(3, 8))
+            if paddleB.rect.y+40 > ball.rect.y:
+                paddleB.moveUp(randint(10,10))
+            if paddleB.rect.y+40 < ball.rect.y:
+                paddleB.moveDown(randint(10,10))
             # Paddle red AI
-            if paddleA.rect.y >= ball.rect.y:
-                paddleA.moveUp(randint(3, 8))
-            if paddleA.rect.y <= ball.rect.y:
-                paddleA.moveDown(randint(3, 8))
+            if paddleA.rect.y+40 > ball.rect.y:
+                paddleA.moveUp(randint(10,10))
+            if paddleA.rect.y+40 < ball.rect.y:
+                paddleA.moveDown(randint(10,10))
             # Paddle Yellow AI
-            if paddleC.rect.x <= ball.rect.x:
-                paddleC.moveRight(randint(2, 6))
-            if paddleC.rect.x >= ball.rect.x:
-                paddleC.moveLeft(randint(2, 6))
+            if paddleC.rect.x+40 < ball.rect.x:
+                paddleC.moveRight(randint(10,10))
+            if paddleC.rect.x+40 > ball.rect.x:
+                paddleC.moveLeft(randint(10,10))
             # Paddle Green AI
-            if paddleD.rect.x <= ball.rect.x:
-                paddleD.moveRight(randint(2, 6))
-            if paddleD.rect.x >= ball.rect.x:
-                paddleD.moveLeft(randint(2, 6))
+            if paddleD.rect.x+40 < ball.rect.x:
+                paddleD.moveRight(randint(10,10))
+            if paddleD.rect.x+40 > ball.rect.x:
+                paddleD.moveLeft(randint(10,10))
         # update sprites in real time while the game plays.
         all_sprites_list.update()
         # Ball bounce of walls (not yet goals) score point
@@ -165,14 +152,6 @@ def main():
             all_sprites_list.remove(ball)
             ball = Ball(settings.WHITE, (10, 10), (randint(300,400), randint(300,400)))
             all_sprites_list.add(ball)
-                    
-        # TIME
-        #if self.time_check("myTimer", 5.):
-        #do the thing
-        #   self is not defined
-        #if self.time_check("myTimer", 5.):
-        #    text = font.render(str('aaaaaaaaaaaaa'), 1, settings.GREEN)
-        #    screen.blit(text, (255, 255))
         # ball physics to push ball away if it gets behind the paddle
         if (
             ball.rect.x >= 660
@@ -202,6 +181,17 @@ def main():
         ):
             ball.velocity[1] = -ball.velocity[1]
             ball.rect.y = 25
+        if (
+            ball.velocity[1] < 1.0
+            and ball.velocity[1] > -1.0
+        ):
+            ball.bounce()
+        if (
+            ball.velocity[0] < 1.0 
+            and ball.velocity[0] > -1.0
+        ):
+            ball.bouncevertical() 
+            
         # ball physics to bounce on collision with paddles checks for score to disable bouncing as paddle object stays in game its just sprite that stops rendering.
         if pygame.sprite.collide_mask(ball, paddleA) and scoreA >= 1:
             ball.bounce()
@@ -226,7 +216,24 @@ def main():
         all_sprites_list.draw(screen)
         # update me please anytime i move
         # scoring logic
-        font = pygame.font.Font(None, 74)
+        font = pygame.font.Font(None, 50)
+        if settings.DEBUG == True:
+            text = font.render(str(ball.velocity[0]), 1, settings.RED)
+            screen.blit(text, (200, 250))
+            text = font.render(str(ball.velocity[1]), 1, settings.RED)
+            screen.blit(text, (200, 450))
+            text = font.render(str(ball.rect.x), 1, settings.WHITE)
+            screen.blit(text, (200, 350))
+            text = font.render(str(ball.rect.y), 1, settings.WHITE) 
+            screen.blit(text, (200, 550))
+            text = font.render(str('X:'), 1, settings.WHITE)
+            screen.blit(text, (160, 350))
+            text = font.render(str('Y:'), 1, settings.WHITE) 
+            screen.blit(text, (160, 550))
+            text = font.render(str('bounce count'), 1, settings.PURPLE)
+            screen.blit(text, (400,500))
+            text = font.render(str(ball.bouncecount), 1, settings.PURPLE)
+            screen.blit(text, (400, 540))
         if scoreA >= 1 and winner != "red":
             text = font.render(str(scoreA), 1, settings.RED)
             screen.blit(text, (25, 10))
