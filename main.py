@@ -20,7 +20,7 @@ from paddle import Paddle
 def main():
     # pygame initialize
     pygame.init()
-    # BOTS turn True to turn on all bots.
+    # BOTS turn True to turn on all bots. ---01Variables
     winner = ""
     loser = ""
     time_elapsed = 0
@@ -79,8 +79,18 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
                     carryOn = False
+                #might just make variable or something.
+                elif event.key == pygame.K_SPACE:
+                    print("space down")
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_SPACE:
+                    print("space up")
+                    ball.bouncedouble2()
         # Controls
+        
         keys = pygame.key.get_pressed()
+        if keys[pygame.K_t]:
+            ball.bouncedouble3()
         if keys[pygame.K_w]:
             paddleA.moveUp(5)
         if keys[pygame.K_s]:
@@ -97,8 +107,6 @@ def main():
             paddleD.moveLeft(5)
         if keys[pygame.K_RIGHT]:
             paddleD.moveRight(5)
-        if keys[pygame.K_SPACE]:
-            ball.bouncevertical()
         if settings.BOTS == True:
             # Blue Paddle AI
             if paddleB.rect.y+40 > ball.rect.y:
