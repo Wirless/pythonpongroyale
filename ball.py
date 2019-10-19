@@ -28,7 +28,13 @@ class Ball(pygame.sprite.Sprite):
         self.velocity[0] = -self.velocity[0]
         self.velocity[1] = uniform(settings.BALLSPEED1, settings.BALLSPEED2)
         self.bouncecount+=1
-    def bouncevertical(self):
-        self.velocity[0] = uniform(settings.BALLSPEED1, settings.BALLSPEED2)
+    def bouncedouble(self):
+        self.velocity[0] = -self.velocity[0]
         self.velocity[1] = -self.velocity[1]
         self.bouncecount+=1
+    def bouncedouble2(self):
+        self.velocity[0] = -self.velocity[0]
+        self.velocity[1] = +self.velocity[1]
+    def bouncedouble3(self):
+        self.velocity[0] = +self.velocity[0]
+        self.velocity[1] = -self.velocity[1]
