@@ -7,6 +7,7 @@ BLUE = (80, 255, 239)
 PURPLE = (203, 0, 255)
 RED = (237, 28, 36)
 COLOR = RED
+COUNTER = 0
 #self.velocity[1] min,max
 BALLSPEED1 = -14.00
 BALLSPEED2 = 14.00
@@ -18,3 +19,8 @@ RIGHT_WALL = 690
 #DEBUG AND BOTS!
 DEBUG = False
 BOTS = False
+
+BALL_SPRITE = {
+    "file": "ballxd.png",
+    "size": [10, 10],
+}
