@@ -26,7 +26,9 @@ def main():
     loser = ""
     time_elapsed = 0
     dt = pygame.time.get_ticks()
-
+    if settings.AUDIO == True:
+        sfxc = SoundEffect(settings.CJ, 1.0)
+        sfxc.play()
     # Players health
     scoreA = 3
     scoreB = 3
@@ -131,21 +133,25 @@ def main():
         all_sprites_list.update()
         # Ball bounce of walls (not yet goals) score point
         if ball.rect.x >= settings.RIGHT_WALL:
-            ball.sound_effect()
             scoreB -= 1
             ball.velocity[0] = -ball.velocity[0]
+            if scoreB > -1:
+                ball.sound_effect()
         if ball.rect.x <= settings.LEFT_WALL:
-            ball.sound_effect()
             scoreA -= 1
             ball.velocity[0] = -ball.velocity[0]
+            if scoreA > -1:
+                ball.sound_effect()
         if ball.rect.y > settings.BOTTOM_WALL:
-            ball.sound_effect()
             scoreD -= 1
             ball.velocity[1] = -ball.velocity[1]
+            if scoreD > -1:
+                ball.sound_effect()
         if ball.rect.y < settings.TOP_WALL:
-            ball.sound_effect()
             scoreC -= 1
             ball.velocity[1] = -ball.velocity[1]
+            if scoreC > -1:
+                ball.sound_effect()
 
         if ball.rect.y < -10:
             all_sprites_list.remove(ball)
@@ -210,9 +216,21 @@ def main():
             ball.bounce()
         elif pygame.sprite.collide_mask(ball, paddleC) and scoreC >= 1:
             ball.bounce()
-        elif pygame.sprite.collide_mask(ball, paddleD) and scoreD >= 1:
+        elif pygame.sprite.collide_mask(ball, paddleD)and scoreD >= 1:# and ball.rect.y+10 != paddleD.rect.y-1 
             ball.bounce()
         # BEGIN removing the sprite of each paddle once player dies.
+        if scoreA == 0:
+            paddleA.sound_effect()
+            scoreA-= 1
+        if scoreB == 0:
+            paddleB.sound_effect()
+            scoreB-= 1
+        if scoreC == 0:
+            paddleC.sound_effect()
+            scoreC-= 1
+        if scoreD == 0:
+            paddleD.sound_effect()
+            scoreD-= 1
         if scoreA <= 0:
             all_sprites_list.remove(paddleA)
         if scoreB <= 0:
