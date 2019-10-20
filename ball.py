@@ -19,10 +19,13 @@ class Ball(pygame.sprite.Sprite):
         self.rect.topleft = pos
         self.rotation = 0
         self.bouncecount = 0
-        self.sfx = SoundEffect(settings.HIT, 0.5)
+        self.sfx = SoundEffect(settings.HIT, 1.0)
+        self.sfx2 = SoundEffect(settings.PONG, 1.0)
     def sound_effect(self):
-        """Sound effect for the hitmark when on collision."""
+        """Sound effect for the hitmark when on collision. or pong"""
         self.sfx.play()
+    def sound_effect2(self):
+        self.sfx2.play()
 
     def update(self):
         self.rect.x += self.velocity[0]

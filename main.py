@@ -16,7 +16,8 @@ from goal import Goal
 from paddle import Paddle
 
 
-
+def restart():
+    main()
 def main():
     # pygame initialize
     pygame.init()
@@ -163,32 +164,34 @@ def main():
             ball = Ball(settings.WHITE, (10, 10), (randint(300,400), randint(300,400)))
             all_sprites_list.add(ball)
         # ball physics to push ball away if it gets behind the paddle
-        if ball.rect.x-10 > paddleB.rect.x and pygame.sprite.collide_mask(ball,paddleB):
-            ball.velocity[1] = -ball.velocity[1]
         if (
             pygame.sprite.collide_mask(ball, paddleB)
             and scoreB >= 1
         ):
             ball.velocity[0] = -ball.velocity[0]
             ball.rect.x = 660
+            ball.sound_effect2()
         if (
             pygame.sprite.collide_mask(ball, paddleA)
             and scoreA >= 1
         ):
             ball.velocity[0] = -ball.velocity[0]
             ball.rect.x = 30
+            ball.sound_effect2()
         if (
             pygame.sprite.collide_mask(ball, paddleD)
             and scoreD >= 1
         ):
             ball.velocity[1] = -ball.velocity[1]
             ball.rect.y = 670
+            ball.sound_effect2()
         if (
             pygame.sprite.collide_mask(ball, paddleC)
             and scoreC >= 1
         ):
             ball.velocity[1] = -ball.velocity[1]
             ball.rect.y = 25
+            ball.sound_effect2()
         if (
             ball.velocity[1] < 1.0
             and ball.velocity[1] > -1.0
@@ -298,8 +301,7 @@ def main():
         # display FPS instead of title
         # pygame.display.set_caption("fps: " + str(clock.get_fps()))
         if winner != '':
-            pygame.time.delay(4000)
-            main()
+            restart()
             
     # goodybe
     pygame.quit()
