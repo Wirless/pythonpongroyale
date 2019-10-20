@@ -1,3 +1,7 @@
+import os.path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+AUDIO_DIR = os.path.join(BASE_DIR, "audio")
+HIT = os.path.join(AUDIO_DIR, "hit.wav")
 # Color enumerators.
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)

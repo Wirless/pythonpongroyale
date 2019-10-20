@@ -4,7 +4,7 @@
 # authors: Wirless / hnrkcode / ... #
 # Title: Paddle Royale              #
 #####################################
-
+from sounds import SoundEffect
 from random import randint
 
 # required libraries
@@ -130,15 +130,19 @@ def main():
         all_sprites_list.update()
         # Ball bounce of walls (not yet goals) score point
         if ball.rect.x >= settings.RIGHT_WALL:
+            ball.sound_effect()
             scoreB -= 1
             ball.velocity[0] = -ball.velocity[0]
         if ball.rect.x <= settings.LEFT_WALL:
+            ball.sound_effect()
             scoreA -= 1
             ball.velocity[0] = -ball.velocity[0]
         if ball.rect.y > settings.BOTTOM_WALL:
+            ball.sound_effect()
             scoreD -= 1
             ball.velocity[1] = -ball.velocity[1]
         if ball.rect.y < settings.TOP_WALL:
+            ball.sound_effect()
             scoreC -= 1
             ball.velocity[1] = -ball.velocity[1]
 

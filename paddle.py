@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-
-# some paddle yoke
-# Created by some wee man
-
 import pygame
 
 import settings
@@ -10,7 +5,6 @@ import settings
 
 # application is here
 class Paddle(pygame.sprite.Sprite):
-    """Represents a car. It derives from the "Sprite" class in Pygame."""
 
     def __init__(self, color, size, pos):
         # Call the parent class (Sprite) constructor

@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-
-# some paddle yoke
-# Created by some wee man
-
 import pygame
 
 import settings
@@ -10,7 +5,6 @@ import settings
 
 # application is here
 class Goal(pygame.sprite.Sprite):
-    """Represents a car. It derives from the "Sprite" class in Pygame."""
 
     def __init__(self, color, size, pos):
         # Call the parent class (Sprite) constructor
@@ -28,15 +22,3 @@ class Goal(pygame.sprite.Sprite):
         # Fetch the rectangle object that has the dimensions of the image.
         self.rect = self.image.get_rect()
         self.rect.topleft = pos
-
-    def moveUp(self, pixels):
-        self.rect.y -= pixels
-        # Check that you are not going too far (off the screen)
-        if self.rect.y < 0:
-            self.rect.y = 0
-
-    def moveDown(self, pixels):
-        self.rect.y += pixels
-        # Check that you are not going too far (off the screen)
-        if self.rect.y > 400:
-            self.rect.y = 400
