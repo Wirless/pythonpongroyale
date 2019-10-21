@@ -1,0 +1,9 @@
+if ball.velocity[1] > 0.0 and ball.velocity[0] > 0.0:
++ +
+
+elif ball.velocity[1] > 0.0 and ball.velocity[0] < 0.0:
++ -
+elif ball.velocity[1] < 0.0 and ball.velocity[0] > 0.0:
+- +
+elif blal.velocity[1] < 0.0 and ball.velocity[0] < 0.0:
+- -
