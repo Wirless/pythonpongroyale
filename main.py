@@ -132,6 +132,7 @@ def main():
         # update sprites in real time while the game plays.
         all_sprites_list.update()
         # Ball bounce of walls (not yet goals) score point
+        
         if ball.rect.x >= settings.RIGHT_WALL:
             scoreB -= 1
             ball.velocity[0] = -ball.velocity[0]
@@ -198,6 +199,11 @@ def main():
             ball.velocity[1] = -ball.velocity[1]
             ball.rect.y = 25
             ball.sound_effect2()
+        #
+        #
+        #
+        #
+        #Ball velocity in straight line #OOGBERROR
         if (
             ball.velocity[1] < 1.0
             and ball.velocity[1] > -1.0
@@ -210,6 +216,12 @@ def main():
             ball.bounce() 
             
         # ball physics to bounce on collision with paddles checks for score to disable bouncing as paddle object stays in game its just sprite that stops rendering.
+        ######
+        #Issue 1
+        #if ball.rect.right == paddleB.rect.left:
+        #    ball.bounce()
+        #
+        # What happens when ball hits Paddle
         if pygame.sprite.collide_mask(ball, paddleA) and scoreA >= 1:
             ball.bounce()
         elif pygame.sprite.collide_mask(ball, paddleB) and scoreB >= 1:
