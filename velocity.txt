@@ -1,4 +1,4 @@
-if ball.velocity[1] > 0.0 and ball.velocity[0] > 0.0:
+if ball.velocity[1] > 0.0 and ball.velocity[0] > 0.0: #paddlerect
 + +
 
 elif ball.velocity[1] > 0.0 and ball.velocity[0] < 0.0:
