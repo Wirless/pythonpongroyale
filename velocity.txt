@@ -5,5 +5,14 @@ elif ball.velocity[1] > 0.0 and ball.velocity[0] < 0.0:
 + -
 elif ball.velocity[1] < 0.0 and ball.velocity[0] > 0.0:
 - +
-elif blal.velocity[1] < 0.0 and ball.velocity[0] < 0.0:
+elif ball.velocity[1] < 0.0 and ball.velocity[0] < 0.0:
 - -
+
+if ball.velocity[0] == +ball.velocity[0]:
+  print ("X positive")
+elif ball.velocity[1] == +ball.velocity[1]:
+  print ("Y positive")
+elif ball.velocity[1] == -ball.velocity[1]:
+  print ("Y negative")
+elif ball.velocity[0] == -ball.velocity[0]:
+  print ("X negative")
